@@ -49,9 +49,9 @@ if __name__ == '__main__':
 				# Test face against model.
 				label, confidence = model.predict(crop)
 				print 'Predicted {0} face with confidence {1} (lower is more confident).'.format(
-					'POSITIVE' if label == config.POSITIVE_LABEL else 'NEGATIVE', 
+					'POSITIVE' if label != config.NEGATIVE_LABEL else 'NEGATIVE', 
 					confidence)
-				if label == config.POSITIVE_LABEL and confidence < config.POSITIVE_THRESHOLD:
+				if label != config.NEGATIVE_LABEL and confidence < config.POSITIVE_THRESHOLD:
 					print 'Recognized face!'
 					box.unlock()
 				else:

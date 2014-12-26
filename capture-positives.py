@@ -30,19 +30,33 @@ def is_letter_input(letter):
 
 
 if __name__ == '__main__':
+	if len (sys.argv) <= 1:
+		print 'Use: capture-postives.py <name>'
+		sys.exit()
+
+	person = sys.argv[1]
+
 	camera = config.get_camera()
 	box = hardware.Box()
 	# Create the directory for positive training images if it doesn't exist.
 	if not os.path.exists(config.POSITIVE_DIR):
 		os.makedirs(config.POSITIVE_DIR)
-	# Find the largest ID of existing positive images.
-	# Start new images after this ID value.
-	files = sorted(glob.glob(os.path.join(config.POSITIVE_DIR, 
-		POSITIVE_FILE_PREFIX + '[0-9][0-9][0-9].pgm')))
+		
+	dirs = sorted(glob.glob(os.path.join(config.POSITIVE_DIR, '[0-9][0-9][0-9]*/')))
+	last_dir_index = 0
+	if (len(dirs) > 0):
+		last_dir_index = int(dirs[-1][:3])+1
+	person_dir = os.path.join(config.POSITIVE_DIR, '%03d-%s' % (last_dir_index, person))
+	os.makedirs(person_dir)
+
+		# Find the largest ID of existing positive images.
+		# Start new images after this ID value.
+		# files = sorted(glob.glob(os.path.join(config.POSITIVE_DIR, 
+		# 	POSITIVE_FILE_PREFIX + '[0-9][0-9][0-9].pgm')))
 	count = 0
-	if len(files) > 0:
-		# Grab the count from the last filename.
-		count = int(files[-1][-7:-4])+1
+		# if len(files) > 0:
+		# 	# Grab the count from the last filename.
+		# 	count = int(files[-1][-7:-4])+1
 	print 'Capturing positive training images.'
 	print 'Press button or type c (and press enter) to capture an image.'
 	print 'Press Ctrl-C to quit.'
@@ -64,7 +78,7 @@ if __name__ == '__main__':
 			# Might be smaller if face is near edge of image.
 			crop = face.crop(image, x, y, w, h)
 			# Save image to file.
-			filename = os.path.join(config.POSITIVE_DIR, POSITIVE_FILE_PREFIX + '%03d.pgm' % count)
+			filename = os.path.join(person_dir, '%03d.pgm' % count)
 			cv2.imwrite(filename, crop)
 			print 'Found face and wrote training image', filename
 			count += 1

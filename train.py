@@ -61,10 +61,17 @@ if __name__ == '__main__':
 	pos_count = 0
 	neg_count = 0
 	# Read all positive images
-	for filename in walk_files(config.POSITIVE_DIR, '*.pgm'):
-		faces.append(prepare_image(filename))
-		labels.append(config.POSITIVE_LABEL)
-		pos_count += 1
+	for root, dirs, files in os.walk(config.POSITIVE_DIR):
+		for dir_name in dirs:
+			dir_num = int(config.dir_name[:3])
+			for filename in walk_files(os.path.join(root, dir_name), '*.pgm'):
+				faces.append(prepare_image(filename))
+				labels.append(dir_num)
+				pos_count += 1
+	# for filename in walk_files(config.POSITIVE_DIR, '*.pgm'):
+	# 	faces.append(prepare_image(filename))
+	# 	labels.append(config.POSITIVE_LABEL)
+	# 	pos_count += 1
 	# Read all negative images
 	for filename in walk_files(config.NEGATIVE_DIR, '*.pgm'):
 		faces.append(prepare_image(filename))

@@ -40,7 +40,7 @@ NEGATIVE_DIR = './training/negative'
 # Can be any integer values, but must be unique from each other.
 # You shouldn't have to change these values.
 POSITIVE_LABEL = 1
-NEGATIVE_LABEL = 2
+NEGATIVE_LABEL = -1
 
 # Size (in pixels) to resize images for training and prediction.
 # Don't change this unless you also change the size of the training images.
@@ -61,8 +61,8 @@ DEBUG_IMAGE = 'capture.pgm'
 def get_camera():	
 	# Camera to use for capturing images.
 	# Use this code for capturing from the Pi camera:
-	import picam
-	return picam.OpenCVCapture()
+	# import picam
+	# return picam.OpenCVCapture()
 	# Use this code for capturing from a webcam:
-	# import webcam
-	# return webcam.OpenCVCapture(device_id=0)
+	import webcam
+	return webcam.OpenCVCapture(device_id=0)
