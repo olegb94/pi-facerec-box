@@ -45,7 +45,7 @@ if __name__ == '__main__':
 	dirs = sorted(glob.glob(os.path.join(config.POSITIVE_DIR, '[0-9][0-9][0-9]*/')))
 	last_dir_index = 0
 	if (len(dirs) > 0):
-		relpath = os.os.path.relpath(dirs[-1], start=config.POSITIVE_DIR)
+		relpath = os.path.relpath(dirs[-1], start=config.POSITIVE_DIR)
 		last_dir_index = int(relpath[:3])+1
 	person_dir = os.path.join(config.POSITIVE_DIR, '%03d-%s' % (last_dir_index, person))
 	os.makedirs(person_dir)
