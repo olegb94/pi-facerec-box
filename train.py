@@ -63,7 +63,7 @@ if __name__ == '__main__':
 	# Read all positive images
 	for root, dirs, files in os.walk(config.POSITIVE_DIR):
 		for dir_name in dirs:
-			dir_num = int(config.dir_name[:3])
+			dir_num = int(dir_name[:3])
 			for filename in walk_files(os.path.join(root, dir_name), '*.pgm'):
 				faces.append(prepare_image(filename))
 				labels.append(dir_num)

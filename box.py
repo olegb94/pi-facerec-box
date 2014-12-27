@@ -33,6 +33,7 @@ if __name__ == '__main__':
 				print 'Box is now locked.'
 			else:
 				print 'Button pressed, looking for face...'
+				box.print_number(-2)
 				# Check for the positive face and unlock if found.
 				image = camera.read()
 				# Convert image to grayscale.
@@ -52,7 +53,9 @@ if __name__ == '__main__':
 					'POSITIVE' if label != config.NEGATIVE_LABEL else 'NEGATIVE', 
 					confidence)
 				if label != config.NEGATIVE_LABEL and confidence < config.POSITIVE_THRESHOLD:
-					print 'Recognized face!'
+					print 'Recognized face! Person %d' % label
+					box.print_number(label)
 					box.unlock()
 				else:
 					print 'Did not recognize face!'
+					box.print_number(-1)
