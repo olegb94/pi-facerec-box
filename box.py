@@ -43,6 +43,7 @@ if __name__ == '__main__':
 				if result is None:
 					print 'Could not detect single face!  Check the image in capture.pgm' \
 						  ' to see what was captured and try again with only one face visible.'
+					box.print_number(-1)
 					continue
 				x, y, w, h = result
 				# Crop and resize image to face.
