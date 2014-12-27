@@ -68,14 +68,14 @@ class Box(object):
 
 	def print_number(self, number):
 		if (number==-1):
-			self.out_pins(1,0,0,1,0,0,0,1)
+			self.out_pins(0,1,1,0,1,1,1,0)
 		elif (number==-2):
 			self.out_pins(0,0,0,0,0,0,0,1)
 		elif (number==0):
-			self.out_pins(1,1,1,1,1,0,0,1)
+			self.out_pins(0,0,0,0,0,1,1,0)
 		elif (number==1):
-			self.out_pins(0,1,1,0,0,0,0,1)
+			self.out_pins(1,0,0,1,1,1,1,0)
 		elif (number==2):
-			self.out_pins(0,0,1,0,0,1,0,1)
+			self.out_pins(1,1,0,1,1,0,1,0)
 
 
